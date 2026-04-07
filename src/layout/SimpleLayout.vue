@@ -8,6 +8,7 @@
 .simple-layout {
   min-height: 100vh;
   width: 100%;
-  background-color: #f0f2f5;
+  background: #f5f7fa;
+  color: #303133;
 }
 </style>
