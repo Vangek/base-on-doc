@@ -26,10 +26,29 @@
     <main class="hero">
       <div class="hero__grid">
         <section id="intro" class="hero__content">
-          <h1 class="hero__title">base-on-ui</h1>
-          <p class="hero__subtitle">Vue 3 企业级组件库</p>
+          <h1 class="hero__title">
+            <span
+              v-for="(ch, i) in titleChars"
+              :key="`ht-${i}`"
+              class="hero__shatter hero__shatter--title"
+              :style="shatterStyle(i, 11, 0.045)"
+            >{{ ch }}</span>
+          </h1>
+          <p class="hero__subtitle">
+            <span
+              v-for="(ch, i) in subtitleChars"
+              :key="`hs-${i}`"
+              class="hero__shatter hero__shatter--sub"
+              :style="shatterStyle(i, 23, 0.05)"
+            >{{ ch === ' ' ? '\u00a0' : ch }}</span>
+          </p>
           <p class="hero__desc">
-            开箱即用的表单、表格与业务组件，统一设计语言与交互规范，帮助你快速搭建中后台与数据类产品界面。
+            <span
+              v-for="(ch, i) in descChars"
+              :key="`hd-${i}`"
+              class="hero__shatter hero__shatter--desc"
+              :style="shatterStyle(i, 37, 0.016)"
+            >{{ ch }}</span>
           </p>
 
           <div class="hero__actions">
@@ -81,8 +100,39 @@
 </template>
 
 <script setup name="Index">
+import { computed } from 'vue'
 import { ElMessage } from 'element-plus'
 import { DocumentCopy, Link, MagicStick, View } from '@element-plus/icons-vue'
+
+const HERO_TITLE = 'base-on-ui'
+const HERO_SUBTITLE = 'Vue 3 企业级组件库'
+const HERO_DESC =
+  '开箱即用的表单、表格与业务组件，统一设计语言与交互规范，帮助你快速搭建中后台AI流式交互类产品界面。'
+
+const titleChars = computed(() => HERO_TITLE.split(''))
+const subtitleChars = computed(() => HERO_SUBTITLE.split(''))
+const descChars = computed(() => HERO_DESC.split(''))
+
+function pseudoRandom(n, seed) {
+  const x = Math.sin(n * 12.9898 + seed * 78.233) * 43758.5453
+  return x - Math.floor(x)
+}
+
+/** 破碎→归位：每字独立位移/旋转与交错延迟 */
+function shatterStyle(index, seed, staggerSec) {
+  const r1 = pseudoRandom(index, seed)
+  const r2 = pseudoRandom(index + 1, seed + 7)
+  const r3 = pseudoRandom(index + 2, seed + 13)
+  const tx = (r1 - 0.5) * 76
+  const ty = (r2 - 0.5) * 58
+  const rot = (r3 - 0.5) * 26
+  return {
+    '--tx': `${tx}px`,
+    '--ty': `${ty}px`,
+    '--rot': `${rot}deg`,
+    '--delay': `${index * staggerSec}s`,
+  }
+}
 
 const installCmd = '$ npm install base-on-ui'
 
@@ -284,10 +334,6 @@ async function copyInstall() {
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  background: linear-gradient(120deg, #fb7185 0%, #f472b6 35%, #f97316 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
   filter: drop-shadow(0 2px 12px rgba(244, 114, 182, 0.15));
 }
 
@@ -295,10 +341,6 @@ async function copyInstall() {
   margin: 0 0 20px;
   font-size: clamp(1.15rem, 2.5vw, 1.5rem);
   font-weight: 600;
-  background: linear-gradient(120deg, #34d399 0%, #22d3ee 50%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 .hero__desc {
@@ -306,7 +348,55 @@ async function copyInstall() {
   max-width: 520px;
   font-size: 15px;
   line-height: 1.75;
+}
+
+.hero__shatter {
+  display: inline-block;
+  opacity: 0;
+  animation: hero-shatter-in 0.78s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--delay, 0s);
+  will-change: transform, opacity, filter;
+}
+
+.hero__shatter--title {
+  background: linear-gradient(120deg, #fb7185 0%, #f472b6 35%, #f97316 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__shatter--sub {
+  background: linear-gradient(120deg, #34d399 0%, #22d3ee 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__shatter--desc {
   color: #606266;
+}
+
+@keyframes hero-shatter-in {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--tx), var(--ty), 0) rotate(var(--rot)) scale(0.86);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__shatter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+    will-change: auto;
+  }
 }
 
 .hero__actions {
