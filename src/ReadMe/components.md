@@ -27,11 +27,6 @@
   - `JsonItem`、`TreeItem`、`StatsConfig` 等子组件
   - 可用于构建可视化表单配置器或复杂 JSON 配置编辑界面
 
-- **BaseDialog**
-  - 基于 `el-dialog` 的业务弹窗封装：
-  - 支持插槽扩展
-  - 便于与 `BaseFormMini` 等表单组件配合使用
-
 - **BasePagination**
   - 基于 Element Plus 分页器的封装：
   - 通过 `pagination`（如 `pageNum`、`pageSize`）与 `total` 控制分页
@@ -42,10 +37,6 @@
   - 支持 **Word（doc/docx）**、**Excel（xls/xlsx）**、**PDF**，可传入远程 `url` 或本地二进制（`File` / `Blob` / `ArrayBuffer`），并通过 `suffix` 或 `mimeType` 指定类型
   - 依赖已随 `base-on-ui` 一起打包，业务项目 **无需再单独安装 vue-office**
 
-- **BaseIconSelect**
-  - 图标选择组件：
-  - 内部维护可选图标列表（`iconSelect.js`）
-  - 提供统一的图标选择交互
 
 - **BaseCronSelect**
   - Cron 表达式选择组件：

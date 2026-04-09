@@ -1,0 +1,16 @@
+<template>
+  <BaseCronSelect v-model="cron" @change="onChange" />
+  <p>当前表达式：{{ cron || '（空）' }}</p>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { BaseCronSelect } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const cron = ref('0 0 12 * * ?')
+
+function onChange() {
+  console.log('change', cron.value)
+}
+</script>

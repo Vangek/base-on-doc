@@ -39,6 +39,41 @@ const routes = [
                 component: () => import('@/views/components/index.vue'),
               },
               {
+                path: 'base-table',
+                name: 'BaseTable',
+                component: () => import('@/views/components/BaseTable.vue'),
+              },
+              {
+                path: 'base-search',
+                name: 'BaseSearch',
+                component: () => import('@/views/components/BaseSearch.vue'),
+              },
+              {
+                path: 'base-pagination',
+                name: 'BasePagination',
+                component: () => import('@/views/components/BasePagination.vue'),
+              },
+              {
+                path: 'base-file-preview',
+                name: 'BaseFilePreview',
+                component: () => import('@/views/components/BaseFilePreview.vue'),
+              },
+              {
+                path: 'base-form-mini',
+                name: 'BaseFormMini',
+                component: () => import('@/views/components/BaseFormMini.vue'),
+              },
+              {
+                path: 'base-form-json',
+                name: 'BaseFormJson',
+                component: () => import('@/views/components/BaseFormJson.vue'),
+              },
+              {
+                path: 'base-cron-select',
+                name: 'BaseCronSelect',
+                component: () => import('@/views/components/BaseCronSelect.vue'),
+              },
+              {
                 path: ':slug',
                 name: 'ComponentDoc',
                 component: () => import('@/views/components/index.vue'),

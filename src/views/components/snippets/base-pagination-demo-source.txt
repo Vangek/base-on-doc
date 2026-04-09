@@ -1,0 +1,24 @@
+<template>
+  <BasePagination
+    :total="total"
+    :pagination="pagination"
+    @handlePagination="onPagination"
+  />
+</template>
+
+<script setup>
+import { reactive, ref } from 'vue'
+import { BasePagination } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const total = ref(256)
+const pagination = reactive({
+  pageNum: 1,
+  pageSize: 10,
+})
+
+function onPagination(p) {
+  Object.assign(pagination, p)
+  // 此处根据 p.pageNum / p.pageSize 请求列表接口
+}
+</script>

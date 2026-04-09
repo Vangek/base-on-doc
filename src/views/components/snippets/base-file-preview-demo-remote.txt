@@ -1,0 +1,18 @@
+<template>
+  <BaseFilePreview
+    src="https://example.com/demo.pdf"
+    suffix="pdf"
+    @rendered="onRendered"
+    @error="onError"
+  />
+</template>
+
+<script setup>
+const onRendered = () => {
+  console.log('渲染完成')
+}
+
+const onError = (err) => {
+  console.error('预览失败', err)
+}
+</script>

@@ -1,0 +1,62 @@
+<template>
+  <BaseTable
+    :table-header="tableHeader"
+    :data-list="dataList"
+    :pagination="pagination"
+    :total="total"
+    :loading="loading"
+    :is-selection="true"
+    :show-toolbar="true"
+    @handleSelection="onSelection"
+    @handlePagination="onPagination"
+  >
+    <template #status="{ row }">
+      <el-tag :type="row.status === '启用' ? 'success' : 'info'" size="small">
+        {{ row.status }}
+      </el-tag>
+    </template>
+  </BaseTable>
+</template>
+
+<script setup>
+import { reactive, ref, computed } from 'vue'
+import { BaseTable } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const loading = ref(false)
+const total = ref(28)
+const pagination = reactive({ pageNum: 1, pageSize: 10 })
+const selectedRows = ref([])
+
+const tableHeader = [
+  { prop: 'id', label: '编号', width: 80 },
+  { prop: 'name', label: '名称', width: 180, showOverflowTooltip: true },
+  {
+    prop: 'amount',
+    label: '金额',
+    width: 120,
+    formatter: (row) => `¥${Number(row.amount).toFixed(2)}`,
+  },
+  { prop: 'status', label: '状态', width: 100, slotName: 'status' },
+]
+
+const allMock = Array.from({ length: total.value }, (_, i) => ({
+  id: i + 1,
+  name: `示例项目 ${String(i + 1).padStart(2, '0')}`,
+  amount: 500 + i * 37.25,
+  status: i % 3 === 0 ? '停用' : '启用',
+}))
+
+const dataList = computed(() => {
+  const start = (pagination.pageNum - 1) * pagination.pageSize
+  return allMock.slice(start, start + pagination.pageSize)
+})
+
+function onSelection(rows) {
+  selectedRows.value = rows
+}
+
+function onPagination(p) {
+  Object.assign(pagination, p)
+}
+</script>

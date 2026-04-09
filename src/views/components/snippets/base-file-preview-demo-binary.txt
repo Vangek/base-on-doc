@@ -1,0 +1,14 @@
+<template>
+  <BaseFilePreview
+    :file="selectedFile"
+    suffix="xlsx"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const selectedFile = ref(null)
+
+// 例如：上传组件选择文件后赋值 selectedFile.value = file
+</script>

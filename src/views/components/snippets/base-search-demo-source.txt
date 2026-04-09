@@ -1,0 +1,32 @@
+<template>
+  <BaseSearch
+    :form="form"
+    :search-list="searchList"
+    label-width="105px"
+    @handleSearch="onSearch"
+  />
+</template>
+
+<script setup>
+import { reactive } from 'vue'
+import { BaseSearch } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const form = reactive({
+  keyword: '',
+  name: '',
+  remark: '',
+})
+
+const searchList = [
+  { type: 'input', label: '关键词', prop: 'keyword' },
+  { type: 'input', label: '名称', prop: 'name' },
+  { type: 'rangeDate', label: '创建日期', prop: 'createRange' },
+  { type: 'rangeDateTime', label: '更新时间', prop: 'updateRange' },
+  { type: 'input', label: '备注', prop: 'remark' },
+]
+
+function onSearch(params) {
+  console.log(params)
+}
+</script>

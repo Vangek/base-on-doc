@@ -1,0 +1,32 @@
+<template>
+  <BaseFormJson
+    v-model="formData"
+    :config="formConfig"
+    :hide-module="false"
+    :hide-config="true"
+    max-height="520px"
+  />
+</template>
+
+<script setup>
+import { reactive } from 'vue'
+import { BaseFormJson } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const formData = reactive({})
+
+const formConfig = reactive({
+  labelWidth: '100px',
+  labelPosition: 'right',
+  formItems: [
+    {
+      component: 'input',
+      name: 'title',
+      label: '标题',
+      span: 24,
+      value: '示例',
+      options: { placeholder: '可从左侧拖拽更多控件到画布' },
+    },
+  ],
+})
+</script>
