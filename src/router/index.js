@@ -31,7 +31,19 @@ const routes = [
           {
             path: '',
             name: 'Components',
-            component: () => import('@/views/components/index.vue'),
+            component: () => import('@/layout/ComponentLayout.vue'),
+            children: [
+              {
+                path: '',
+                name: 'ComponentsIndex',
+                component: () => import('@/views/components/index.vue'),
+              },
+              {
+                path: ':slug',
+                name: 'ComponentDoc',
+                component: () => import('@/views/components/index.vue'),
+              },
+            ],
             meta: { title: '组件' }
           }
         ]
