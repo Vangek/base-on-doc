@@ -1,0 +1,23 @@
+<template>
+  <BaseMdEditor :content="content" @submit-change="onSubmitChange" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { BaseMdEditor } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const content = ref(`# 标题\n\n第一段。\n\n第二段。`)
+
+async function onSubmitChange({ demand, line }) {
+  // line 为 1-based 起始行号；split 后为 0-based，需用 line - 1
+  const lines = content.value.split('\n')
+  const idx = line - 1
+  if (idx < 0 || idx >= lines.length) return
+
+  // await callAi({ demand, line, rawLine: lines[idx] })
+  await new Promise((r) => setTimeout(r, 500))
+  lines[idx] = `> 已按「${demand}」处理（起始行 ${line}）`
+  content.value = lines.join('\n')
+}
+</script>

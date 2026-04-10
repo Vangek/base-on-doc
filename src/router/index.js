@@ -74,6 +74,11 @@ const routes = [
                 component: () => import('@/views/components/BaseCronSelect.vue'),
               },
               {
+                path: 'base-md-editor',
+                name: 'BaseMdEditor',
+                component: () => import('@/views/components/BaseMdEditor.vue'),
+              },
+              {
                 path: ':slug',
                 name: 'ComponentDoc',
                 component: () => import('@/views/components/index.vue'),

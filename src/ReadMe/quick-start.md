@@ -53,14 +53,43 @@ app.mount('#app')
 
 `src/index.js` 中导出了一个 `install` 方法，会：
 
-- 批量注册所有组件（`BaseCronSelect`、`BaseDialog`、`BaseFormJson`、`BaseFormMini`、`BaseFilePreview`、`BaseIconSelect`、`BasePagination`、`BaseSearch`、`BaseTable`、`BaseUpload`）
+- 批量注册所有组件（`BaseCronSelect`、`BaseDialog`、`BaseFormJson`、`BaseFormMini`、`BaseFilePreview`、`BaseIconSelect`、`BaseMdEditor`、`BasePagination`、`BaseSearch`、`BaseTable`、`BaseUpload`）
 - 注册全局指令 `v-copy`
 
 你也可以按需导入单个组件使用：
 
 ```js
-import { BaseTable, BaseSearch } from 'base-on-ui'
+import { BaseTable, BaseSearch, BaseMdEditor } from 'base-on-ui'
 ```
+
+### BaseMdEditor 示例（段落级 AI 修改 Markdown）
+
+适用于「点击某一段落 → 输入修改要求 → 父组件调大模型 → 回写全文 `content`」场景。事件 **`submit-change`** 载荷为 `{ demand, line }`，其中 **`line` 为源码行号且从 1 开始**；若用 `content.split('\n')` 得到数组，访问目标行请使用 **`lines[line - 1]`**。
+
+```vue
+<template>
+  <BaseMdEditor :content="md" @submit-change="onSubmitChange" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { BaseMdEditor } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const md = ref('# 标题\n\n第一段。\n\n第二段。')
+
+async function onSubmitChange({ demand, line }) {
+  const rows = md.value.split('\n')
+  const i = line - 1
+  if (i < 0 || i >= rows.length) return
+  // const next = await fetchRevisedMarkdown(demand, line, rows[i])
+  rows[i] = '> 已处理：' + demand
+  md.value = rows.join('\n')
+}
+</script>
+```
+
+更完整的说明见文档站 **组件 → BaseMdEditor** 页面。
 
 ### BaseFilePreview 示例
 

@@ -1,6 +1,13 @@
 <template>
   <nav class="component-menu" aria-label="组件列表">
+    <div class="component-menu__title">后台组件</div>
     <div class="component-menu__link" v-for="item in menuList" :key="item.path">
+      <router-link :to="item.path">
+        {{ item.name }}
+      </router-link>
+    </div>
+    <div class="component-menu__title">AI 组件</div>
+    <div class="component-menu__link" v-for="item in aiMenuList" :key="item.path">
       <router-link :to="item.path">
         {{ item.name }}
       </router-link>
@@ -10,6 +17,7 @@
 
 <script setup>
 import { componentMenuList } from '@/config/componentsMenu.js'
+import { aiMenuList } from '@/config/aiMenuList.js'
 
 const menuList = componentMenuList
 </script>
@@ -26,6 +34,13 @@ const menuList = componentMenuList
   padding: 16px 12px;
   overflow: auto;
   border-right: 1px solid #ebeef5;
+}
+
+.component-menu__title {
+  width: 35%;
+  font-size: 16px;
+  font-weight: 600;
+  color: #303133;
 }
 
 .component-menu__link {
