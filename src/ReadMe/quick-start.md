@@ -53,14 +53,32 @@ app.mount('#app')
 
 `src/index.js` 中导出了一个 `install` 方法，会：
 
-- 批量注册所有组件（`BaseCronSelect`、`BaseDialog`、`BaseFormJson`、`BaseFormMini`、`BaseFilePreview`、`BaseIconSelect`、`BaseMdEditor`、`BasePagination`、`BaseSearch`、`BaseTable`、`BaseUpload`）
+- 批量注册所有组件（`BaseCronSelect`、`BaseDialog`、`BaseFormJson`、`BaseFormMini`、`BaseFilePreview`、`BaseIconSelect`、`BaseMarkDown`、`BaseMdEditor`、`BasePagination`、`BaseSearch`、`BaseTable`、`BaseUpload`）
 - 注册全局指令 `v-copy`
 
 你也可以按需导入单个组件使用：
 
 ```js
-import { BaseTable, BaseSearch, BaseMdEditor } from 'base-on-ui'
+import { BaseTable, BaseSearch, BaseMarkDown, BaseMdEditor } from 'base-on-ui'
 ```
+
+### BaseMarkDown 示例（纯展示 Markdown）
+
+```vue
+<template>
+  <BaseMarkDown :content="md" />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { BaseMarkDown } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const md = ref('# 标题\n\n**粗体** 与 ~~删除线~~\n')
+</script>
+```
+
+标签插槽、`x-md-slot`、公式与 `[TOC]` 等能力见文档站 **组件 → BaseMarkDown**。
 
 ### BaseMdEditor 示例（段落级 AI 修改 Markdown）
 

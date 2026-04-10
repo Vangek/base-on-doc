@@ -4,7 +4,7 @@ export const aiMenuList = [
     path: '/components/sender',
   },
   {
-    name: 'BaseMarkdown',
+    name: 'BaseMarkDown',
     path: '/components/markdown',
   },
   {

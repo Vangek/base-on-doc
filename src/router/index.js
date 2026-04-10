@@ -79,6 +79,11 @@ const routes = [
                 component: () => import('@/views/components/BaseMdEditor.vue'),
               },
               {
+                path: 'markdown',
+                name: 'BaseMarkDown',
+                component: () => import('@/views/components/BaseMarkDown.vue'),
+              },
+              {
                 path: ':slug',
                 name: 'ComponentDoc',
                 component: () => import('@/views/components/index.vue'),

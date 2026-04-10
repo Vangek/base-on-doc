@@ -1,0 +1,144 @@
+<template>
+  <BaseMarkDown :content="md" :allow-html="true">
+    <template #img="props">
+      <img
+        :key="props.key"
+        :src="props.src"
+        :alt="props.alt"
+        style="max-width: 100%; border-radius: 8px"
+      />
+    </template>
+    <template #chip="{ label }">
+      <el-tag type="success">{{ label }}</el-tag>
+    </template>
+  </BaseMarkDown>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import { BaseMarkDown } from 'base-on-ui'
+import 'base-on-ui/style.css'
+
+const md = ref(`# 一级标题
+## 二级标题
+### 三级标题
+#### 四级标题
+##### 五级标题
+###### 六级标题
+
+---
+
+## 文本格式
+**粗体文本**
+*斜体文本*
+***粗斜体文本***
+~~删除线~~
+<u>下划线</u>
+==高亮文本==
+^上标^
+~下标~
+
+---
+
+## 列表
+### 无序列表
+- 项目 1
+- 项目 2
+  - 子项目 2-1
+  - 子项目 2-2
+
+### 有序列表
+1. 第一项
+2. 第二项
+3. 第三项
+   1. 子项 3-1
+   2. 子项 3-2
+
+### 任务列表
+- [x] 已完成任务
+- [ ] 未完成任务
+
+---
+
+## 引用
+> 一级引用
+>> 二级嵌套引用
+>>> 三级嵌套引用
+
+---
+
+## 代码
+### 行内代码
+这是 \`行内代码\` 示例
+
+### 代码块
+\`\`\`python
+def hello():
+    print("Hello Markdown")
+\`\`\`
+
+\`\`\`javascript
+console.log('Hello World')
+\`\`\`
+
+---
+
+## 链接与图片
+[链接文字](https://www.example.com "标题")
+
+![图片描述](https://picsum.photos/200/100 "图片标题")
+
+---
+
+## 表格
+| 左对齐 | 居中对齐 | 右对齐 |
+|:-------|:--------:|-------:|
+| 内容1   | 内容2    | 内容3  |
+| 长文本测试 | 测试居中 | 测试右 |
+
+---
+
+## 分割线
+---
+***
+___
+
+---
+
+## 数学公式
+### 行内公式
+$E=mc^2$
+
+### 块级公式
+$$
+\\int_{-\\infty}^{+\\infty} e^{-x^2} dx = \\sqrt{\\pi}
+$$
+
+---
+
+## 注释（隐藏内容）
+<!-- 这是注释，不会显示 -->
+
+---
+
+## 脚注
+文本内容带有脚注[^1]
+
+[^1]: 这是脚注内容
+
+---
+
+## 自定义插槽（占位写法）
+在正文中使用固定标签 **x-md-slot**，通过 **name**、**data-props** 与父组件具名插槽对应：
+
+<x-md-slot name="chart" data-props='{"title":"销售额","value":"100"}' />
+
+<x-md-slot name="note" data-props='{"text":"这是第二处插槽"}' />
+
+---
+
+## 目录
+[TOC]
+
+`)
+</script>
